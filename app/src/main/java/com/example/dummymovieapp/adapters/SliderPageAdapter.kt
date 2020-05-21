@@ -1,4 +1,4 @@
-package com.example.dummymovieapp
+package com.example.dummymovieapp.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.getSystemService
 import androidx.viewpager.widget.PagerAdapter
-import java.util.*
+import com.example.dummymovieapp.R
+import com.example.dummymovieapp.models.Slide
 import kotlin.collections.ArrayList
 
 class SliderPageAdapter(var ctx:Context,var slist:ArrayList<Slide>) : PagerAdapter() {
