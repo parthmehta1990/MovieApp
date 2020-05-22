@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dummymovieapp.R
+import com.example.dummymovieapp.adapters.CastAdapter
+import com.example.dummymovieapp.models.Cast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MovieDetailActivity : AppCompatActivity() {
@@ -24,7 +28,10 @@ class MovieDetailActivity : AppCompatActivity() {
     lateinit var txtTitle:TextView
     lateinit var txtDesc:TextView
     lateinit var fab_Play:FloatingActionButton
+    lateinit var RvCast:RecyclerView
 
+    lateinit var castData:ArrayList<Cast>
+    lateinit var castAdapter:CastAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
         viewInitialize()
         assignData()
+        assignCastData()
 
 
     }
@@ -52,9 +60,12 @@ class MovieDetailActivity : AppCompatActivity() {
         txtTitle=findViewById(R.id.detail_movie_title)
         txtDesc=findViewById(R.id.detail_movie_desc)
         fab_Play=findViewById(R.id.detail_movie_fab_play)
+
+        RvCast=findViewById(R.id.rv_cast)
+
     }
 
-    fun assignData()
+    private fun assignData()
     {
         //imgPic.setImageResource(imgURL)
         Glide.with(this).load(imgURL).into(imgPic)
@@ -66,6 +77,25 @@ class MovieDetailActivity : AppCompatActivity() {
         imgCoverPic.animation=AnimationUtils.loadAnimation(this,R.anim.scale_animation)
 
         fab_Play.animation=AnimationUtils.loadAnimation(this,R.anim.scale_animation)
+
+    }
+
+    fun assignCastData(){
+
+        castData= ArrayList()
+        castData.add(Cast("cast One",R.drawable.cast_one))
+        castData.add(Cast("cast Two",R.drawable.cast_two))
+        castData.add(Cast("cast Three",R.drawable.cast_three))
+        castData.add(Cast("cast Four",R.drawable.cast_four))
+        castData.add(Cast("cast 5",R.drawable.cast_one))
+        castData.add(Cast("cast 6",R.drawable.cast_two))
+        castData.add(Cast("cast 7",R.drawable.cast_three))
+        castData.add(Cast("cast 8",R.drawable.cast_four))
+
+        castAdapter= CastAdapter(this,castData)
+        RvCast.adapter=castAdapter
+
+        RvCast.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
 
     }
 
