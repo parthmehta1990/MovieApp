@@ -1,5 +1,6 @@
 package com.example.dummymovieapp.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -63,6 +64,12 @@ class MovieDetailActivity : AppCompatActivity() {
 
         RvCast=findViewById(R.id.rv_cast)
 
+
+        fab_Play.setOnClickListener {
+
+            var openvideoPlayer=Intent(this,MoviePlayerActivity::class.java)
+            startActivity(openvideoPlayer)
+        }
     }
 
     private fun assignData()

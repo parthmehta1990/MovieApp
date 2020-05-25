@@ -18,6 +18,7 @@ import com.example.dummymovieapp.adapters.MovieItemClickListener
 import com.example.dummymovieapp.adapters.SliderPageAdapter
 import com.example.dummymovieapp.models.Movies
 import com.example.dummymovieapp.models.Slide
+import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity(),
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity(),
     lateinit var slidePager: ViewPager
     lateinit var indicator: TabLayout
     lateinit var movieRV: RecyclerView
+    lateinit var movie_week_RV: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun createMovieData() {
-        var lstMovies: ArrayList<Movies>
+        var lstMovies: MutableList<Movies>
         lstMovies = ArrayList()
 
         lstMovies.add(
@@ -67,13 +69,13 @@ class MainActivity : AppCompatActivity(),
         lstMovies.add(
             Movies(
                 "The Martian",
-                thumbnail = R.drawable.themartian
+                thumbnail = R.drawable.blackp
             )
         )
         lstMovies.add(
             Movies(
                 "The Martian",
-                thumbnail = R.drawable.themartian
+                thumbnail = R.drawable.mov2
             )
         )
         lstMovies.add(
@@ -84,12 +86,16 @@ class MainActivity : AppCompatActivity(),
         )
 
         movieRV = findViewById(R.id.Rv_movies)
+        movie_week_RV = findViewById(R.id.rv_movie_week)
 
         var movieAdapter: MovieAdapter =
-            MovieAdapter(this, lstMovies, this)
+            MovieAdapter(this,
+                lstMovies.shuffled(Random(maxOf(0, lstMovies.size))) as ArrayList<Movies>, this)
         movieRV.adapter = movieAdapter
+        movie_week_RV.adapter=movieAdapter
 
         movieRV.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        movie_week_RV.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
     }
 
